@@ -56,6 +56,9 @@ class PSJoyToUnitreeWirelessController(Node):
                 input_button.rx = 0.5
             
             self.current_action_input = input_button
+
+        except IndexError:
+            self.get_logger().warn("Error: IndexError", throttle_duration_sec=5)
                 
 
     def current_button_callback(self):
