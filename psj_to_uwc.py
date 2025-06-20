@@ -13,17 +13,14 @@ class PSJoyToUnitreeWirelessController(Node):
         super().__init__('ps_joy_to_unitree_wireless_controller')
         
         self.action_hz = 0.2  # the Hz for go2 action
-        self.last_publish_time = self.get_clock().now()
         
         #subscription: read playsation joy controller input button
         self.ps_joy_sub = self.create_subscription(Joy, '/joy', self.joy_callback, 5)
 
         #publisher: publish unitree wireless controller output msgs
         self.unitree_wireless_controller_pub = self.create_publisher(WirelessController, '/wirelesscontroller', 5)
-
         
         self.current_action_input = WirelessController()
-        self.reset_unitree_wireless_controller_input()
 
         self.action_input_timer = self.create_timer(self.action_hz, self.current_button_callback)
     
